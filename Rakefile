@@ -5,11 +5,11 @@ require 'rspec/core/rake_task'
 begin
   require 'emeril/rake'
 rescue LoadError
-  puts ">>>>> Emeril gem not loaded, omitting tasks" unless ENV['CI']
+  puts '>>>>> Emeril gem not loaded, omitting tasks' unless ENV['CI']
 end
 
-task :spec    => 'spec:all'
-task :default => :spec
+task spec: 'spec:all'
+task default: :spec
 
 namespace :spec do
   targets = []
@@ -18,8 +18,8 @@ namespace :spec do
     targets << File.basename(dir)
   end
 
-  task :all     => targets
-  task :default => :all
+  task all: targets
+  task default: :all
 
   targets.each do |target|
     desc "Run serverspec tests to #{target}"
@@ -34,5 +34,5 @@ begin
   require 'kitchen/rake_tasks'
   Kitchen::RakeTasks.new
 rescue LoadError
-  puts ">>>>> Kitchen gem not loaded, omitting tasks" unless ENV['CI']
+  puts '>>>>> Kitchen gem not loaded, omitting tasks' unless ENV['CI']
 end
